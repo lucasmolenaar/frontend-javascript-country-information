@@ -18,7 +18,8 @@ main {
 }
 
 #countries-list {
-    width: 60%;
+    width: 80%;
+    height: 9000px;
     margin: auto;
     background: #FAFAFA;
     border: 1px solid #EEE;

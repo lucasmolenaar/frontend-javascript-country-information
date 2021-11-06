@@ -29,7 +29,7 @@ async function generateCountryList() {
     }
 }
 
-async function createRegionColor(region) {
+function createRegionColor(region) {
     let textColor;
     switch (region) {
         case 'Africa':

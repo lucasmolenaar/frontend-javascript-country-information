@@ -17,17 +17,19 @@ main {
     height: 500px;
 }
 
+.search-link {
+    display: flex;
+    margin: 2rem;
+    font-size: 1.5rem;
+}
+
 #countries-list {
-    width: 80%;
-    height: 9000px;
     margin: auto;
     background: #FAFAFA;
     border: 1px solid #EEE;
     padding: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
+    column-count: 3;
+    width: 90%;
 }
 
 .country-item {

@@ -1,57 +1,50 @@
 import axios from 'axios';
 
-generateCountryList();
-
-async function generateCountryList() {
+async function fetchCountries() {
     try {
         const countries = await axios.get('https://restcountries.com/v2/all');
+        createListItems(countries)
 
-        const countriesUl = document.getElementById('countries-list');
-
-        const countryList = await countries.data.map((country) => {
-            const {region, flag, name, population} = country;
-            let textColor = createRegionColor(region);
-
-            return `
-                <li class="country-item">
-                    <div class="img-title">
-                        <img class="country-flag" src="${flag}" alt="country-flag">
-                        <h2 class="${textColor}">${name}</h2>
-                    </div>    
-                    <p>Has a population of ${population} people</p>
-                </li>
-            `
-        });
-
-        countriesUl.innerHTML = `${countryList.join('')}`;
     } catch (e) {
         console.log(e);
     }
 }
 
+fetchCountries();
+
+function createListItems(countries) {
+    const countriesUl = document.getElementById('countries-list');
+    let textColor = createRegionColor(region);
+
+    countriesUl.innerHTML = countries.data.map((country) => {
+        const {region, flag, name, population} = country;
+        return `
+            <li class="country-item">
+                <div class="img-title">
+                    <img class="country-flag" src="${flag}" alt="country-flag">
+                    <h2 class="${textColor}">${name}</h2>
+                </div>    
+                <p>Has a population of ${population} people</p>
+            </li>
+        ` 
+        }).join('');
+}
+
 function createRegionColor(region) {
-    let textColor;
     switch (region) {
         case 'Africa':
-            textColor = 'blue';
-            break;
+            return 'blue';
         case 'Americas':
-            textColor = 'green';
-            break;
+            return 'green';
         case 'Asia':
-            textColor = 'red';
-            break;
+            return 'red';
         case 'Europe':
-            textColor = 'yellow';
-            break;
+            return 'yellow';
         case 'Oceania':
-            textColor = 'purple';
-            break;
+            return 'purple';
         default:
-            textColor = 'black';
+            return 'default';
     }
-
-    return textColor;
 }
 
 

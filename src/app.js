@@ -14,10 +14,11 @@ fetchCountries();
 
 function createListItems(countries) {
     const countriesUl = document.getElementById('countries-list');
-    let textColor = createRegionColor(region);
 
     countriesUl.innerHTML = countries.data.map((country) => {
         const {region, flag, name, population} = country;
+        let textColor = createRegionColor(region);
+
         return `
             <li class="country-item">
                 <div class="img-title">

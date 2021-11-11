@@ -1,9 +1,10 @@
+@import "https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Poppins:wght@200&display=swap";
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 main {
     width: 100%;
     display: flex;
@@ -12,34 +13,63 @@ main {
     align-items: center;
     margin-top: 2rem;
 }
-
+.title {
+    font-family: 'Mochiy Pop One', sans-serif;
+}
 .img {
     height: 300px;
 }
-
 .form {
     display: flex;
 
 }
-
 .input {
     padding: .5rem .5rem;
     border-radius: 10px 0 0 10px;
     font-size: 1rem;
     border: 1px solid rgb(182, 182, 182);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
 }
-
-.input {
+.input:focus {
     border: 1px solid rgb(182, 182, 182);
 }
-
-.form button {
+.btn {
     font-size: 1rem;
     border-radius: 0px 10px 10px 0px;
     padding: .5rem .5rem;
     background-color: #BDF337;
     border: 1px solid rgb(182, 182, 182);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
 }
-
+.country-box {
+    width: 550px;
+    height: 200px;
+    margin: 2rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.flag-and-name {
+    display: flex;
+    margin: 1rem;
+}
+.flag-img {
+    height: 25px;
+    margin-right: 1rem;
+}
+.country-name {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 1.2rem;
+}
+.hr {
+    width: 80%;
+    margin: auto;
+}
+.country-info {
+    margin: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    font-size: 0.8rem;
+}
 
 /*# sourceMappingURL=search.4d882caf.css.map */

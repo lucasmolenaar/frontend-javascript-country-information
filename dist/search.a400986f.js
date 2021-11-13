@@ -476,11 +476,10 @@ form.addEventListener('submit', (e)=>{
 async function fetchCountryByName() {
     try {
         //Destructering variables from data
-        const { name , flag , population , capital , subregion  } = await (await _axiosDefault.default.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0];
-        const { name: currency  } = await (await _axiosDefault.default.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0].currencies[0];
-        const { name: language  } = await (await _axiosDefault.default.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0].languages[0];
+        const { name , flag , population , capital , subregion , currencies , languages  } = await (await _axiosDefault.default.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0];
         countryBox.style.display = 'block';
-        createCountryInfoBox(name, flag, subregion, population, capital, language, currency);
+        createCountryInfoBox(name, flag, subregion, population, capital, languages, currencies);
+        console.log(getLanguages(languages));
         //Resetting values
         userInput.value = '';
         errorText.innerHTML = '';
@@ -492,10 +491,14 @@ async function fetchCountryByName() {
         userInput.value = '';
     }
 }
-function createCountryInfoBox(name, imgLink, subregion, population, capital, language, currency) {
+function createCountryInfoBox(name, imgLink, subregion, population, capital, languages, currencies) {
     const countryName = document.querySelector('.country-name');
     const flagImg = document.querySelector('.flag-img');
     const countryInfo = document.querySelector('.country-info');
+    let currency = '';
+    let language = '';
+    if (currencies.length === 2) currency = `${currencies[0].name} and ${currencies[1].name}`;
+    else currency = `${currencies[0].name}`;
     countryName.innerHTML = name;
     flagImg.setAttribute('src', imgLink);
     countryInfo.innerHTML = `
@@ -503,8 +506,18 @@ function createCountryInfoBox(name, imgLink, subregion, population, capital, lan
         <br><br>
         The captital is ${capital} and you can pay with ${currency}.
         <br><br>
-        They speak ${language}.
+        They speak ${getLanguages(languages)}.
     `;
+}
+function getLanguages(languages) {
+    let language = '';
+    if (languages.length === 1) language = `${languages[0].name}`;
+    else if (languages.length === 2) language = `${languages[0].name} and ${languages[1].name}`;
+    else {
+        for(let i = 0; i < languages.length; i++)if (languages[i] - 1 === languages.length) language += `and ${languages[i].name}`;
+        else language += `${languages[i].name}, `;
+    }
+    return language;
 }
 
 },{"axios":"1IeuP","@parcel/transformer-js/src/esmodule-helpers.js":"ciiiV"}],"1IeuP":[function(require,module,exports) {

@@ -489,6 +489,7 @@ async function fetchCountryByName() {
         errorText.innerHTML = `${userInput.value} does not exist.`;
         countryBox.style.display = 'block';
         countryBox.style.display = 'none';
+        userInput.value = '';
     }
 }
 function createCountryInfoBox(name, imgLink, subregion, population, capital, language, currency) {

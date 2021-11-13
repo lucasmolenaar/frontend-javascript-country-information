@@ -34,6 +34,7 @@ async function fetchCountryByName() {
             countryBox.style.display = 'none'
         }
 
+        userInput.value =  '';
     }
 }
 

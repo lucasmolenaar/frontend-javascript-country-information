@@ -1,25 +1,41 @@
 import axios from 'axios';
 
+//Selectors
+const userInput = document.getElementById('input');
+const countryBox = document.querySelector('.country-box');
+const form = document.getElementById('form');
+const errorText = document.getElementById('error');
+
+//Event listener
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    fetchCountryByName();
+});
+
+//Functions
 async function fetchCountryByName() {
     try {
-        const result = await (await axios.get('https://restcountries.com/v2/name/netherlands')).data[0];
-        console.log(result);
+        //Destructering variables from data
+        const {name, flag, population, capital, subregion} = await (await axios.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0];
+        const {name: currency} = await (await axios.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0].currencies[0];
+        const {name: language} = await (await axios.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0].languages[0];
 
-        const {name, flag, population, capital, subregion} = await (await axios.get('https://restcountries.com/v2/name/netherlands')).data[0];
-        const {name: currency} = await (await axios.get('https://restcountries.com/v2/name/netherlands')).data[0].currencies[0];
-        const {name: language} = await (await axios.get('https://restcountries.com/v2/name/netherlands')).data[0].languages[0];
-
-        console.log(name, flag, population, capital, language, subregion, currency);
-        
-
+        countryBox.style.display = 'block';
         createCountryInfoBox(name, flag, subregion, population, capital, language, currency);
 
+        //Resetting values
+        userInput.value =  '';
+        errorText.innerHTML = '';
     } catch (e) {
         console.log(e);
+        errorText.innerHTML = `${userInput.value} does not exist.`
+
+        if (countryBox.style.display = 'block') {
+            countryBox.style.display = 'none'
+        }
+
     }
 }
-
-fetchCountryByName();
 
 function createCountryInfoBox(name, imgLink, subregion, population, capital, language, currency) {
     const countryName = document.querySelector('.country-name');
@@ -36,5 +52,4 @@ function createCountryInfoBox(name, imgLink, subregion, population, capital, lan
         <br><br>
         They speak ${language}.
     `
-}
-
+};

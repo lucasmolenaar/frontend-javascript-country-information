@@ -462,20 +462,35 @@ function hmrAcceptRun(bundle, id) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+//Selectors
+const userInput = document.getElementById('input');
+const countryBox = document.querySelector('.country-box');
+const form = document.getElementById('form');
+const errorText = document.getElementById('error');
+//Event listener
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    fetchCountryByName();
+});
+//Functions
 async function fetchCountryByName() {
     try {
-        const result = await (await _axiosDefault.default.get('https://restcountries.com/v2/name/netherlands')).data[0];
-        console.log(result);
-        const { name , flag , population , capital , subregion  } = await (await _axiosDefault.default.get('https://restcountries.com/v2/name/netherlands')).data[0];
-        const { name: currency  } = await (await _axiosDefault.default.get('https://restcountries.com/v2/name/netherlands')).data[0].currencies[0];
-        const { name: language  } = await (await _axiosDefault.default.get('https://restcountries.com/v2/name/netherlands')).data[0].languages[0];
-        console.log(name, flag, population, capital, language, subregion, currency);
+        //Destructering variables from data
+        const { name , flag , population , capital , subregion  } = await (await _axiosDefault.default.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0];
+        const { name: currency  } = await (await _axiosDefault.default.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0].currencies[0];
+        const { name: language  } = await (await _axiosDefault.default.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0].languages[0];
+        countryBox.style.display = 'block';
         createCountryInfoBox(name, flag, subregion, population, capital, language, currency);
+        //Resetting values
+        userInput.value = '';
+        errorText.innerHTML = '';
     } catch (e) {
         console.log(e);
+        errorText.innerHTML = `${userInput.value} does not exist.`;
+        countryBox.style.display = 'block';
+        countryBox.style.display = 'none';
     }
 }
-fetchCountryByName();
 function createCountryInfoBox(name, imgLink, subregion, population, capital, language, currency) {
     const countryName = document.querySelector('.country-name');
     const flagImg = document.querySelector('.flag-img');

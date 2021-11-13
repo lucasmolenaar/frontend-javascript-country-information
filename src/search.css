@@ -52,11 +52,17 @@ main {
     font-weight: 200;
 }
 
+#error {
+    color: red;
+    margin: 1rem;
+}
+
 .country-box {
     width: 550px;
     height: 200px;
     margin: 2rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: none;
 }
 
 .flag-and-name {

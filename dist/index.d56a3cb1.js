@@ -464,7 +464,11 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 async function fetchCountries() {
     try {
-        const countries = await _axiosDefault.default.get('https://restcountries.com/v2/all');
+        const result = await _axiosDefault.default.get('https://restcountries.com/v2/all');
+        const countries = result.data;
+        countries.sort((a, b)=>{
+            return a.population - b.population;
+        });
         createListItems(countries);
     } catch (e) {
         console.log(e);
@@ -473,7 +477,7 @@ async function fetchCountries() {
 fetchCountries();
 function createListItems(countries) {
     const countriesUl = document.getElementById('countries-list');
-    countriesUl.innerHTML = countries.data.map((country)=>{
+    countriesUl.innerHTML = countries.map((country)=>{
         const { region , flag , name , population  } = country;
         let textColor = createRegionColor(region);
         return `

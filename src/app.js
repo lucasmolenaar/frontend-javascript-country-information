@@ -2,7 +2,13 @@ import axios from 'axios';
 
 async function fetchCountries() {
     try {
-        const countries = await axios.get('https://restcountries.com/v2/all');
+        const result = await axios.get('https://restcountries.com/v2/all');
+        const countries = result.data;
+
+        countries.sort((a, b) => {
+            return a.population - b.population;
+        })
+
         createListItems(countries)
 
     } catch (e) {
@@ -15,7 +21,7 @@ fetchCountries();
 function createListItems(countries) {
     const countriesUl = document.getElementById('countries-list');
 
-    countriesUl.innerHTML = countries.data.map((country) => {
+    countriesUl.innerHTML = countries.map((country) => {
         const {region, flag, name, population} = country;
         let textColor = createRegionColor(region);
 

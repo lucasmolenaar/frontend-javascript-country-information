@@ -479,7 +479,6 @@ async function fetchCountryByName() {
         const { name , flag , population , capital , subregion , currencies , languages  } = await (await _axiosDefault.default.get(`https://restcountries.com/v2/name/${userInput.value}`)).data[0];
         countryBox.style.display = 'block';
         createCountryInfoBox(name, flag, subregion, population, capital, languages, currencies);
-        console.log(getLanguages(languages));
         //Resetting values
         userInput.value = '';
         errorText.innerHTML = '';
@@ -496,7 +495,6 @@ function createCountryInfoBox(name, imgLink, subregion, population, capital, lan
     const flagImg = document.querySelector('.flag-img');
     const countryInfo = document.querySelector('.country-info');
     let currency = '';
-    let language = '';
     if (currencies.length === 2) currency = `${currencies[0].name} and ${currencies[1].name}`;
     else currency = `${currencies[0].name}`;
     countryName.innerHTML = name;
@@ -509,6 +507,7 @@ function createCountryInfoBox(name, imgLink, subregion, population, capital, lan
         They speak ${getLanguages(languages)}.
     `;
 }
+//Bonus opdracht - werkt nog niet goed
 function getLanguages(languages) {
     let language = '';
     if (languages.length === 1) language = `${languages[0].name}`;

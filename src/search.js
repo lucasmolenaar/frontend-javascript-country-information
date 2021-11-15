@@ -21,8 +21,6 @@ async function fetchCountryByName() {
         countryBox.style.display = 'block';
         createCountryInfoBox(name, flag, subregion, population, capital, languages, currencies);
 
-        console.log(getLanguages(languages));
-
         //Resetting values
         userInput.value =  '';
         errorText.innerHTML = '';
@@ -30,10 +28,7 @@ async function fetchCountryByName() {
         console.log(e);
         errorText.innerHTML = `${userInput.value} does not exist.`
 
-        if (countryBox.style.display = 'block') {
-            countryBox.style.display = 'none'
-        }
-
+        if (countryBox.style.display = 'block') {countryBox.style.display = 'none'}
         userInput.value =  '';
     }
 }
@@ -62,6 +57,7 @@ function createCountryInfoBox(name, imgLink, subregion, population, capital, lan
     `
 };
 
+//Bonus opdracht - werkt nog niet goed
 function getLanguages(languages) {
     let language = '';
 

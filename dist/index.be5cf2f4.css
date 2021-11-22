@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Poppins:wght@200&display=swap');
-
+@import "https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Poppins:wght@200&display=swap";
 * {
     margin: 0;
     padding: 0;
@@ -90,19 +89,22 @@ main {
     margin: 5px;
 }
 
-
 .red {
     color: red;
 }
+
 .blue {
     color: blue;
 }
+
 .green {
     color: green;
 }
+
 .yellow {
     color: #e8e812;
 }
+
 .purple {
     color: purple;
 }
@@ -111,3 +113,5 @@ main {
 
 
 
+
+/*# sourceMappingURL=index.be5cf2f4.css.map */
